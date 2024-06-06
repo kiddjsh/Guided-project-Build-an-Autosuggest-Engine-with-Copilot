@@ -14,16 +14,38 @@ Trie dictionary = InitializeTrie(words);
 // DeleteWord();
 // GetSpellingSuggestions();
 
+// Define a method named InitializeTrie that takes an array of strings as an argument
 Trie InitializeTrie(string[] words)
 {
+    // Create a new instance of a Trie
     Trie trie = new Trie();
 
+    // Iterate over each word in the array
     foreach (string word in words)
     {
+        // Insert the current word into the trie
         trie.Insert(word);
     }
 
+    // Return the trie after all words have been inserted
     return trie;
+}
+
+void Main()
+{
+    string[] words = {
+        "as", "astronaut", "asteroid", "are", "around",
+        "cat", "cars", "cares", "careful", "carefully",
+        "for", "follows", "forgot", "from", "front",
+        "mellow", "mean", "money", "monday", "monster",
+        "place", "plan", "planet", "planets", "plans",
+        "the", "their", "they", "there", "towards"};
+
+    Trie dictionary = InitializeTrie(words);
+    SearchWord();
+    PrefixAutocomplete();
+    DeleteWord();
+    GetSpellingSuggestions();
 }
 
 void SearchWord()
