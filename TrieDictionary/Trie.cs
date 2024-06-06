@@ -186,41 +186,43 @@ public class Trie
         return suggestions;
     }
 
+    // Used Copilot to auto-generate code for LevenshteinDistance method to fix the nested `for` loop causing an `IndexOutOfRangeException` updating the loop conditions to `i < m` and `j < n`
     private int LevenshteinDistance(string s, string t)
     {
+        
         int m = s.Length;
         int n = t.Length;
         int[,] d = new int[m, n];
-
+    
         if (m == 0)
         {
             return n;
         }
-
+    
         if (n == 0)
         {
             return m;
         }
-
-        for (int i = 0; i <= m; i++)
+    
+        for (int i = 0; i < m; i++)
         {
             d[i, 0] = i;
         }
-
-        for (int j = 0; j <= n; j++)
+    
+        for (int j = 0; j < n; j++)
         {
             d[0, j] = j;
         }
-
-        for (int j = 0; j <= n; j++)
+    
+        for (int j = 0; j < n; j++)
         {
-            for (int i = 0; i <= m; i++)
+            for (int i = 0; i < m; i++)
             {
                 int cost = (s[i] == t[j]) ? 0 : 1;
                 d[i, j] = Math.Min(Math.Min(d[i, j] + 1, d[i, j] + 1), d[i, j] + cost);
             }
         }
-
+    
         return d[m, n];
     }
 }
