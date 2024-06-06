@@ -27,10 +27,32 @@ public class Trie
         root = new TrieNode();
     }
 
+    // Used Copilot to auto-generate code for Search method
+    // Search for a word in the trie
+    public bool Search(string word)
+    {
+        TrieNode current = root;
+        // For each character in the word
+        foreach (char c in word)
+        {
+            // If the current node does not have the character as a child
+            if (!current.HasChild(c))
+            {
+                // The word is not in the trie
+                return false;
+            }
+            // Move to the child node
+            current = current.Children[c];
+        }
+        // If the word is in the trie
+        return current.IsEndOfWord;
+    }
+
     //Used Copilot to auto-generate comments
     //Inserts a word into the trie
     public bool Insert(string word)
     {
+        // Start at the root node
         TrieNode current = root;
         // For each character in the word
         foreach (char c in word)
@@ -76,7 +98,31 @@ public class Trie
 
     private List<string> GetAllWordsWithPrefix(TrieNode root, string prefix)
     {
-        return null;
+        // removed return statement
+        // Used Copilot to auto-generate List<string> code for GetAllWordsWithPrefix method
+
+        // Create a list to store the words
+        List<string> words = new List<string>();
+        // If the root is null
+        if (root == null)
+        {
+            // Return the list of words
+            return words;
+        }
+        // If the root is the end of a word
+        if (root.IsEndOfWord)
+        {
+            // Add the prefix to the list of words
+            words.Add(prefix);
+        }
+        // For each child of the root
+        foreach (var child in root.Children)
+        {
+            // Add the words with the prefix to the list of words
+            words.AddRange(GetAllWordsWithPrefix(child.Value, prefix + child.Key));
+        }
+        // Return the list of words
+        return words;
     }
 
     public List<string> GetAllWords()
