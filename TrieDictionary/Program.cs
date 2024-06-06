@@ -9,7 +9,7 @@ string[] words = {
         "the", "their", "they", "there", "towards"};
 
 Trie dictionary = InitializeTrie(words);
-SearchWord();
+// SearchWord();
 // PrefixAutocomplete();
 // DeleteWord();
 // GetSpellingSuggestions();
@@ -216,13 +216,25 @@ void GetPrefixInput()
     }
 }
 
+
+// Used Copilot is improve the PrintTrie method code by separating the words into five columns
 void PrintTrie(Trie trie)
 {
     Console.WriteLine("The dictionary contains the following words:");
     List<string> words = trie.GetAllWords();
+    int counter = 0;
     foreach (string word in words)
     {
         Console.Write($"{word}, ");
+        counter++;
+        if (counter == 5)
+        {
+            Console.WriteLine();
+            counter = 0;
+        }
     }
-    Console.WriteLine();
+    if (counter != 0) // If the last line contains less than 5 words
+    {
+        Console.WriteLine();
+    }
 }
