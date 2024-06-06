@@ -219,10 +219,10 @@ public class Trie
             for (int i = 0; i < m; i++)
             {
                 int cost = (s[i] == t[j]) ? 0 : 1;
-                d[i, j] = Math.Min(Math.Min(d[i, j] + 1, d[i, j] + 1), d[i, j] + cost);
+                d[i, j] = Math.Min(Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1), d[i - 1, j - 1] + cost);
             }
         }
     
-        return d[m, n];
+        return d[m - 1, n - 1];
     }
 }
